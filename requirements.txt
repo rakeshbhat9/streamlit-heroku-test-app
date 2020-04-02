@@ -1,6 +1,6 @@
-pandas
-streamlit
-lxml
-requests
-re
-bs4
+pandas==1.0.1
+streamlit==0.57.2
+lxml==4.5.0
+requests==2.22.0
+re==2.2.1
+bs4==4.8.2
