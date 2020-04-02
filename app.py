@@ -27,7 +27,6 @@ def calc_total_review_pages(asin):
     else:
         return "Something went wrong."
 
-@st.cache
 def scrape_reviews(links):
     
     print(f'''There are total of {len(links)} links to source data from.''')
