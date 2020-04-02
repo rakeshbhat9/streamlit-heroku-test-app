@@ -1,3 +1,6 @@
 pandas
 streamlit
 lxml
+requests
+re
+bs4
