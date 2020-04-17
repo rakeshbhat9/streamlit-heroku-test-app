@@ -13,15 +13,15 @@ st.header('''COVID Chart based on UK Gov Data''')
 st.markdown(f'''Data as of {str(d['Specimen date'].max()).split(" ")[0]}
     ''')
 
-area_type = st.sidebar.selectbox(
+area_type = st.selectbox(
     'Select Area Type', d['Area type'].unique().tolist())
 
 d = d[d['Area type'] == area_type]
 
-select_area = st.sidebar.selectbox(
+select_area = st.selectbox(
     'Select your area', d['Area name'].unique().tolist())
 
-trigger = st.sidebar.button('Get chart')
+trigger = st.button('Get chart')
 
 
 if trigger:
