@@ -1,11 +1,22 @@
+# Std libs
+import requests
+import io
+
+# Third party libs
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 
+
 @st.cache
 def read_in_data():
-    d = pd.read_csv('coronavirus-cases.csv', parse_dates=['Specimen date'])
+
+    datastr = requests.get(
+        'https://coronavirus.data.gov.uk/downloads/csv/coronavirus-cases_latest.csv', allow_redirects=True).text
+    data_file = io.StringIO(datastr)
+    d = pd.read_csv(data_file,parse_dates=['Specimen date'])
     return d
+
 
 d = read_in_data()
 
@@ -25,11 +36,12 @@ trigger = st.button('Get chart')
 
 
 if trigger:
-    fil_data = d[(d['Area type'] == area_type) & (d['Area name']==select_area)]
+    fil_data = d[(d['Area type'] == area_type) &
+                 (d['Area name'] == select_area)]
     fig = plt.figure()
     plt.plot(fil_data[['Specimen date', 'Daily lab-confirmed cases',
-                                            'Cumulative lab-confirmed cases']].set_index('Specimen date'))
+                       'Cumulative lab-confirmed cases']].set_index('Specimen date'))
     st.plotly_chart(fig)
-    
+
     st.subheader(f'''Data for last 10 days''')
     st.write(fil_data.head(10))
