@@ -14,7 +14,7 @@ def read_in_data():
     datastr = requests.get(
         'https://coronavirus.data.gov.uk/downloads/csv/coronavirus-cases_latest.csv', allow_redirects=True).text
     data_file = io.StringIO(datastr)
-    d = pd.read_csv(data_file,parse_dates=['Specimen date'])
+    d = pd.read_csv(data_file, parse_dates=['Specimen date'])
     return d
 
 
@@ -36,12 +36,20 @@ trigger = st.button('Get chart')
 
 
 if trigger:
+    st.subheader("Time series chart")
     fil_data = d[(d['Area type'] == area_type) &
                  (d['Area name'] == select_area)]
     fig = plt.figure()
     plt.plot(fil_data[['Specimen date', 'Daily lab-confirmed cases',
                        'Cumulative lab-confirmed cases']].set_index('Specimen date'))
     st.plotly_chart(fig)
+
+    st.subheader("Top 5 worse days for selected area")
+    
+    fig2 = plt.figure()
+    fil_data.reset_index(inplace=True,drop=True)
+    st.area_chart(fil_data.iloc[fil_data['Daily lab-confirmed cases'].nlargest(
+    5).index][['Specimen date', 'Daily lab-confirmed cases']].set_index('Specimen date'))
 
     st.subheader(f'''Data for last 10 days''')
     st.write(fil_data.head(10))
