@@ -52,4 +52,4 @@ if trigger:
     5).index][['Specimen date', 'Daily lab-confirmed cases']].set_index('Specimen date'))
 
     st.subheader(f'''Data for last 10 days''')
-    st.write(fil_data.head(20))
+    st.write(fil_data.head(10))
