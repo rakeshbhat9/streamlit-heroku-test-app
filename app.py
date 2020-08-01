@@ -40,10 +40,10 @@ if trigger:
                 (d['Area name'] == select_area)]
     st.subheader(f'''Total cases as of {str(fil_data['Specimen date'].max()).split(" ")[0]} stands at {fil_data['Cumulative lab-confirmed cases'].max():,}''')
 
-    st.subheader("Time series chart")
-    fig = plt.figure()
-    plt.plot(fil_data[['Specimen date', 'Daily lab-confirmed cases',]].set_index('Specimen date'))
-    st.plotly_chart(fig)
+    # st.subheader("Time series chart")
+    # fig = plt.figure()
+    # plt.plot(fil_data[['Specimen date', 'Daily lab-confirmed cases',]].set_index('Specimen date'))
+    # st.plotly_chart(fig)
 
     st.subheader("Peaks - Top 5 worse days for selected area")
     fig2 = plt.figure()
