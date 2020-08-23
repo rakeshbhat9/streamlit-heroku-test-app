@@ -1,4 +1,4 @@
 pandas==1.0.1
 streamlit==0.57.2
-matplotlib
+matplotlib==3.2.2
 plotly
